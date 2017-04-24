@@ -30,7 +30,11 @@
      :children (if (directory? path) (child-entries path))}))
 
 (defn render-tree [{:keys [name children]}]
-  [name])
+  (cons
+   name
+   (map (fn [child]
+          (str L-branch (:name child)))
+        children)))
 
 (defn birch [dir]
   (->> (tree-entry "" dir)
