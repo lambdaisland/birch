@@ -3,4 +3,12 @@
 ;; vim: ft=clojure:
 (require '[lumo.core :refer [*command-line-args*]])
 
-(println "-->" (first *command-line-args*))
+(def node-fs (js/require "fs"))
+(def node-path (js/require "path"))
+
+(def read-dir (.-readdirSync node-fs))
+(def stat (.-statSync node-fs))
+(def path-join (.-join node-path))
+
+(defn directory? [f]
+  (.isDirectory (stat f)))
