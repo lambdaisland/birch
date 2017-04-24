@@ -19,11 +19,13 @@
 (def L-branch "└── ")
 (def SPACER   "    ")
 
-(defn child-entries [path]
-  )
+(declare tree-entry)
 
-(defn tree-entry [path name]
-  (let [path (path-join path name)]
+(defn child-entries [path]
+  (map #(tree-entry path %1) (read-dir path)))
+
+(defn tree-entry [parent name]
+  (let [path (path-join parent name)]
     {:name name
      :children (if (directory? path) (child-entries path))}))
 
