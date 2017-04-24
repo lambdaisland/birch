@@ -12,3 +12,8 @@
 
 (defn directory? [f]
   (.isDirectory (stat f)))
+
+(def I-branch "│   ")
+(def T-branch "├── ")
+(def L-branch "└── ")
+(def SPACER   "    ")
