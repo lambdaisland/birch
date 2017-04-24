@@ -1,0 +1,4 @@
+#!/usr/bin/env lumo
+(require '[lumo.core :refer [*command-line-args*]])
+
+(println "-->" (first *command-line-args*))
