@@ -1,4 +1,6 @@
 #!/usr/bin/env lumo
+;; -*- mode: clojurescript -*-
+;; vim: ft=clojure:
 (require '[lumo.core :refer [*command-line-args*]])
 
 (println "-->" (first *command-line-args*))
