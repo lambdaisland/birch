@@ -33,7 +33,9 @@
   (cons
    name
    (mapcat (fn [child]
-             (map #(str L-branch %) (render-tree child)))
+             (let [[first & rest] (render-tree child)]
+               (cons (str L-branch first)
+                     (map #(str SPACER %) rest))))
            children)))
 
 (defn birch [dir]
