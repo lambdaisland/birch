@@ -32,11 +32,15 @@
 (defn render-tree [{:keys [name children]}]
   (cons
    name
-   (mapcat (fn [child]
-             (let [[first & rest] (render-tree child)]
-               (cons (str L-branch first)
-                     (map #(str SPACER %) rest))))
-           children)))
+   (mapcat (fn [child index]
+             (let [subtree (render-tree child)
+                   last? (= index (dec (count children)))
+                   prefix-first (if last? L-branch T-branch)
+                   prefix-rest  (if last? SPACER I-branch)]
+               (cons (str prefix-first (first subtree))
+                     (map #(str prefix-rest %) (next subtree)))))
+           children
+           (range))))
 
 (defn birch [dir]
   (->> (tree-entry "" dir)
