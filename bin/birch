@@ -1,7 +1,8 @@
 #!/usr/bin/env lumo
 ;; -*- mode: clojurescript -*-
 ;; vim: ft=clojure:
-(require '[lumo.core :refer [*command-line-args*]])
+(require '[lumo.core :refer [*command-line-args*]]
+         '[clojure.string :as str])
 
 (def node-fs (js/require "fs"))
 (def node-path (js/require "path"))
@@ -17,3 +18,17 @@
 (def T-branch "├── ")
 (def L-branch "└── ")
 (def SPACER   "    ")
+
+(defn tree-entry [path name]
+  ,,,)
+
+(defn render-tree [entry]
+  ,,,)
+
+(defn birch [dir]
+  (->> (tree-entry "" dir)
+       render-tree
+       (str/join "\n")
+       print))
+
+(birch (first *command-line-args*))
