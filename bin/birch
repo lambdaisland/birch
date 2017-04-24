@@ -19,11 +19,16 @@
 (def L-branch "└── ")
 (def SPACER   "    ")
 
+(defn child-entries [path]
+  )
+
 (defn tree-entry [path name]
-  ,,,)
+  (let [path (path-join path name)]
+    {:name name
+     :children (if (directory? path) (child-entries path))}))
 
 (defn render-tree [entry]
-  ,,,)
+  [(prn-str entry)])
 
 (defn birch [dir]
   (->> (tree-entry "" dir)
