@@ -32,9 +32,9 @@
 (defn render-tree [{:keys [name children]}]
   (cons
    name
-   (map (fn [child]
-          (str L-branch (:name child)))
-        children)))
+   (mapcat (fn [child]
+             (map #(str L-branch %) (render-tree child)))
+           children)))
 
 (defn birch [dir]
   (->> (tree-entry "" dir)
