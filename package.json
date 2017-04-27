@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cli-color": "^1.2.0"
+    "cli-color": "^1.2.0",
+    "lumo-cljs": "1.4.1"
   }
 }
