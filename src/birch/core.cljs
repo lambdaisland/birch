@@ -1,8 +1,5 @@
-#!/usr/bin/env lumo
-;; -*- mode: clojurescript -*-
-;; vim: ft=clojure:
-(require '[lumo.core :refer [*command-line-args*]]
-         '[clojure.string :as str])
+(ns birch.core
+  (:require [clojure.string :as str]))
 
 (def node-fs (js/require "fs"))
 (def node-path (js/require "path"))
@@ -42,10 +39,8 @@
            children
            (range))))
 
-(defn birch [dir]
+(defn -main [dir]
   (->> (tree-entry "" dir)
        render-tree
        (str/join "\n")
        print))
-
-(birch (first *command-line-args*))
