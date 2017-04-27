@@ -11,6 +11,9 @@
 (defn directory? [f]
   (.isDirectory (stat f)))
 
+(def cli-color (js/require "cli-color"))
+(def blue-text (.-blue cli-color))
+
 (def I-branch "│   ")
 (def T-branch "├── ")
 (def L-branch "└── ")
@@ -22,13 +25,17 @@
   (map #(tree-entry path %1) (read-dir path)))
 
 (defn tree-entry [parent name]
-  (let [path (path-join parent name)]
+  (let [path (path-join parent name)
+        is-dir (directory? path)]
     {:name name
-     :children (if (directory? path) (child-entries path))}))
+     :directory? is-dir
+     :children (if is-dir (child-entries path))}))
 
-(defn render-tree [{:keys [name children]}]
+(defn render-tree [{:keys [name children directory?]}]
   (cons
-   name
+   (if directory?
+     (blue-text name)
+     name)
    (mapcat (fn [child index]
              (let [subtree (render-tree child)
                    last? (= index (dec (count children)))
