@@ -2,4 +2,4 @@
 
 export BIRCH_BIN="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-$BIRCH_BIN/../node_modules/lumo-cljs/bin/lumo -c src -m birch.core "$@"
+"$BIRCH_BIN"/../node_modules/lumo-cljs/bin/lumo -c src -m birch.core "$@"
