@@ -1,5 +1,7 @@
 #!/bin/bash
 
-export BIRCH_BIN="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export BIRCH_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
 
-"$BIRCH_BIN"/../node_modules/lumo-cljs/bin/lumo -c src -m birch.core "$@"
+"$BIRCH_HOME"/node_modules/lumo-cljs/bin/lumo \
+   -c src:"$BIRCH_HOME"/lib/tools.cli-0.3.5.jar \
+   -m birch.core "$@"

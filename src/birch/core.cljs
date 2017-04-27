@@ -1,5 +1,6 @@
 (ns birch.core
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [cljs.tools.cli :refer [parse-opts]]))
 
 (def node-fs (js/require "fs"))
 (def node-path (js/require "path"))
@@ -45,6 +46,8 @@
                      (map #(str prefix-rest %) (next subtree)))))
            children
            (range))))
+
+(def cli-opts [["-c" "--color" "Colorize the output"]])
 
 (defn -main [dir]
   (->> (tree-entry "" dir)
