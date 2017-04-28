@@ -32,13 +32,13 @@
      :directory? is-dir
      :children (if is-dir (child-entries path))}))
 
-(defn render-tree [{:keys [name children directory?]}]
+(defn render-tree [color? {:keys [name children directory?]}]
   (cons
-   (if directory?
+   (if (and color? directory?)
      (blue-text name)
      name)
    (mapcat (fn [child index]
-             (let [subtree (render-tree child)
+             (let [subtree (render-tree color? child)
                    last? (= index (dec (count children)))
                    prefix-first (if last? L-branch T-branch)
                    prefix-rest  (if last? SPACER I-branch)]
@@ -49,8 +49,9 @@
 
 (def cli-opts [["-c" "--color" "Colorize the output"]])
 
-(defn -main [dir]
-  (->> (tree-entry "" dir)
-       render-tree
-       (str/join "\n")
-       print))
+(defn -main [& args]
+  (let [{:keys [options arguments]} (parse-opts args cli-opts)]
+    (->> (tree-entry "" (first arguments))
+         (render-tree (:color options))
+         (str/join "\n")
+         print)))
